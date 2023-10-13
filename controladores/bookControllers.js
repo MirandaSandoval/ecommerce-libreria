@@ -11,8 +11,8 @@ const bookController = {
   },
 
   createBook: async (req, res) => {
-    const { title, author, /* Otros campos del libro */ } = req.body;
-    const newBook = new Book({ title, author /* Otros campos del libro */ });
+    const { titulo, autor,ISBN, precio, edicion } = req.body;
+      const newBook = new Book({ titulo, autor, ISBN, precio, edicion});
 
     try {
       const savedBook = await newBook.save();
@@ -22,27 +22,24 @@ const bookController = {
     }
   },
 
-  updateBook: async (req, res) => {
+  actualizaBook: async (req, res) => {
     const bookId = req.params.id;
-    const { title, author, /* Otros campos a actualizar */ } = req.body;
+      const { titulo, autor, ISBN, precio, edicion } = req.body;
 
     try {
-      const updatedBook = await Book.findByIdAndUpdate(
-        bookId,
-        { title, author /* Otros campos a actualizar */ },
-        { new: true }
-      );
-      res.json(updatedBook);
+      const actualizaBook = await Book.findByIdAndUpdate(bookId,
+          { titulo, autor, ISBN, precio, edicion }, { new: true });
+      res.json(actualizaBook);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
   },
 
-  deleteBook: async (req, res) => {
+  eliminaBook: async (req, res) => {
     const bookId = req.params.id;
     try {
-      const deletedBook = await Book.findByIdAndDelete(bookId);
-      res.json(deletedBook);
+      const eliminaBook = await Book.findByIdAndDelete(bookId);
+      res.json(eliminaBook);
     } catch (err) {
       res.status(400).json({ message: err.message });
     }

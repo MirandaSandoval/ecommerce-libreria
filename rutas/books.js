@@ -15,14 +15,16 @@ router.get('/', async (req, res) => {
 // Ruta para crear un nuevo libro
 router.post('/', async (req, res) => {
   const book = new Book({
-    title: req.body.title,
-    author: req.body.author,
-    // Otros campos del libro
+      titulo: req.body.title,
+      autor: req.body.author,
+      ISBN: req.body.ISBN,
+      precio: req.body.precio,
+      edicion: req.body.edicion
   });
 
   try {
-    const newBook = await book.save();
-    res.status(201).json(newBook);
+    const nuevoBook = await book.save();
+    res.status(201).json(nuevoBook);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -32,8 +34,8 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
   const bookId = req.params.id;
   try {
-    const updatedBook = await Book.findByIdAndUpdate(bookId, req.body, { new: true });
-    res.json(updatedBook);
+    const actualizaBook = await Book.findByIdAndUpdate(bookId, req.body, { new: true });
+    res.json(actualizaBook);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -43,8 +45,8 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const bookId = req.params.id;
   try {
-    const deletedBook = await Book.findByIdAndDelete(bookId);
-    res.json(deletedBook);
+    const eliminaBook = await Book.findByIdAndDelete(bookId);
+    res.json(eliminaBook);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
