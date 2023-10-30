@@ -1,49 +1,32 @@
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
-
-// Importa las rutas y controladores necesarios
-const bookRoutes = require('./routes/books');
-const userRoutes = require('./routes/users');
-const cartRoutes = require('./routes/carts');
-
 const app = express();
-const PORT = 5000;
 
-// Conexión a la base de datos MongoDB
-mongoose.connect('mongodb://localhost:27017/ecommerce', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
-// Middleware
-app.use(cors());
+// Configuración de bodyParser para procesar las solicitudes POST
 app.use(bodyParser.json());
 
+// Conexión a la base de datos MongoDB
+mongoose.connect('mongodb://localhost:27017/tienda-libros', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Rutas
+const authRoutes = require('./rutas/autenticacion');
+const bookRoutes = require('./rutas/libros');
+const cartRoutes = require('./rutas/carritos');
+const orderRoutes = require('./rutas/pedidos');
+
+// Middleware para manejar rutas
+app.use('/auth', authRoutes);
 app.use('/books', bookRoutes);
-app.use('/users', userRoutes);
-app.use('/carts', cartRoutes);
-
-// Manejo de errores para rutas no encontradas
-app.use((req, res, next) => {
-    const error = new Error('Ruta no encontrada');
-    error.status = 404;
-    next(error);
-});
-
-// Manejo de errores para cualquier otro tipo de error
-app.use((error, req, res, next) => {
-    res.status(error.status || 500);
-    res.json({
-        error: {
-            message: error.message
-        }
-    });
-});
+app.use('/cart', cartRoutes);
+app.use('/orders', orderRoutes);
 
 // Iniciar el servidor
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Servidor Express escuchando en el puerto ${PORT}`);
+  console.log(`Servidor en funcionamiento en el puerto ${PORT}`);
 });

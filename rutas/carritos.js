@@ -1,4 +1,18 @@
+// routes/cart.js
 const express = require('express');
+const router = express.Router();
+const cartController = require('../controladores/carritoControllers');
+
+router.post('/add', cartController.addToCarrito);
+router.get('/view', cartController.getUserCart);
+router.delete('/remove/:id', cartController.borrardeCart);
+
+module.exports = router;
+
+
+
+
+/*const express = require('express');
 const router = express.Router();
 const Cart = require('../models/Cart');
 
@@ -45,4 +59,4 @@ router.delete('/user/:userId/remove/:bookId', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;*/

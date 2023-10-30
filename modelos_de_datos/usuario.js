@@ -22,37 +22,21 @@ const validacionEmail = [
     })
 ];
 
-const ageValidator = [
-    // Validaciones...
-];
-
-const genderValidator = [
-    // validaciones...
-];
-
 // Define el modelo de base de datos
-const UserSchema = new mongoose.Schema({
+const UsuarioSchema = new mongoose.Schema({
     nombre: {
         type: String,
-        required: [true, 'Name is required.'],
+        required: [true, 'Se solicita el nombre.'],
         validate: validacionNombre
     },
     email: {
         type: String,
-        required: [true, 'Email is required.'],
+        required: [true, 'Se solicita el email.'],
         unique: true,
         validate: validacionEmail
-    },
-    edad: {
-        type: Number,
-        validate: ageValidator
-    },
-    genero: {
-        type: String,
-        validate: genderValidator
     }
 });
 //Para que se loguee solo un usuario con una direccion de correo electronico
-UserSchema.plugin(unique, { message: 'Este {PATH} ya esta ocupado.' });
+UsuarioSchema.plugin(unique, { message: 'Este {PATH} ya esta ocupado.' });
 
-const User = module.exports = mongoose.model('user', UserSchema);
+const Usuario = module.exports = mongoose.model('user', UsuarioSchema);

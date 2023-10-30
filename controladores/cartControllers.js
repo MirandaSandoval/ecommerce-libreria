@@ -1,47 +1,47 @@
-const Cart = require('../models/Cart');
+const Cart = require('../modelos_de_datos/carrito');
 
-const cartController = {
+const carritoController = {
     getUserCart: async (req, res) => {
-        const userId = req.params.userId;
+        const usuarioId = req.params.usuarioId;
         try {
-            const cart = await Cart.findOne({ userId });
-            res.json(cart);
+            const carrito = await carrito.findOne({ usuarioId });
+            res.json(carrito);
         } catch (err) {
             res.status(500).json({ message: err.message });
         }
     },
 
-    addToCart: async (req, res) => {
-        const userId = req.params.userId;
-        const { bookId, quantity } = req.body;
+    addToCarrito: async (req, res) => {
+        const usuarioId = req.params.usuarioId;
+        const { libroId, cantidad } = req.body;
 
         try {
-            const cart = await Cart.findOneAndUpdate(
-                { userId },
-                { $addToSet: { books: { bookId, quantity } } },
+            const carrito = await carrito.findOneAndUpdate(
+                { usuarioId },
+                { $addToSet: { libros: { libroId, cantidad } } },
                 { new: true, upsert: true }
             );
-            res.json(cart);
+            res.json(carrito);
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     },
 
-    removeFromCart: async (req, res) => {
-        const userId = req.params.userId;
-        const bookId = req.params.bookId;
+    borrardeCarrito: async (req, res) => {
+        const usuarioId = req.params.usuarioId;
+        const libroId = req.params.libroId;
 
         try {
-            const cart = await Cart.findOneAndUpdate(
-                { userId },
-                { $pull: { books: { bookId } } },
+            const carrito = await carrito.findOneAndUpdate(
+                { usuarioId },
+                { $pull: { libros: { libroId } } },
                 { new: true }
             );
-            res.json(cart);
+            res.json(carrito);
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
     }
 };
 
-module.exports = cartController;
+module.exports = carritoController;

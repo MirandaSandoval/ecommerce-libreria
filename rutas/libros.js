@@ -1,4 +1,20 @@
+// routes/books.js
 const express = require('express');
+const router = express.Router();
+const libroController = require('../controladores/libroControllers');
+const { route } = require('./libros');
+
+router.get('/', libroController.getAllBooks);
+router.get('/:id', libroController.getBookById);
+router.delete('/remove/:id', libroController.deleteLibro);
+router.post('/add', libroController.crearLibro);
+
+module.exports = router;
+
+
+
+
+/*const express = require('express');
 const router = express.Router();
 const Book = require('../models/Book');
 
@@ -50,4 +66,4 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = router;*/
