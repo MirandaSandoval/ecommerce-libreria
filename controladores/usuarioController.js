@@ -16,14 +16,14 @@ exports.registro = async (req, res) => {
     };
 
 exports.login = async (req, res) => {
-        const { email, contraseña } = req.body;
-        try {
-            const usuario = await usuario.findOne({ email, contraseña });
-            if (!usuario) {
-                return res.status(401).json({ message: 'Credenciales inválidas' });
-            }
-            res.json(usuario);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
+    const { email, contraseña } = req.body;
+    try {
+        const usuario = await usuario.findOne({ email, contraseña });
+        if (!usuario) {
+            return res.status(401).json({ message: 'Credenciales inválidas' });
         }
+        res.json(usuario);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
     }
+};

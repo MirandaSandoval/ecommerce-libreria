@@ -1,17 +1,16 @@
 const Cart = require('../modelos_de_datos/carrito');
 
-const carritoController = {
-    getUserCart: async (req, res) => {
-        const usuarioId = req.params.usuarioId;
-        try {
-            const carrito = await carrito.findOne({ usuarioId });
-            res.json(carrito);
-        } catch (err) {
-            res.status(500).json({ message: err.message });
-        }
-    },
+exports.getUserCart = async (req, res) => {
+    const usuarioId = req.params.usuarioId;
+    try {
+        const carrito = await carrito.findOne({ usuarioId });
+        res.json(carrito);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
 
-    addToCarrito: async (req, res) => {
+    exports.addToCarrito = async (req, res) => {
         const usuarioId = req.params.usuarioId;
         const { libroId, cantidad } = req.body;
 
@@ -25,9 +24,9 @@ const carritoController = {
         } catch (err) {
             res.status(400).json({ message: err.message });
         }
-    },
+    };
 
-    borrardeCarrito: async (req, res) => {
+exports.borrardeCarrito = async (req, res) => {
         const usuarioId = req.params.usuarioId;
         const libroId = req.params.libroId;
 
@@ -42,6 +41,4 @@ const carritoController = {
             res.status(400).json({ message: err.message });
         }
     }
-};
 
-module.exports = carritoController;

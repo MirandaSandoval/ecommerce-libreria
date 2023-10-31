@@ -1,4 +1,4 @@
-// routes/orders.js
+// rutas/pedidos.js
 const express = require('express');
 const router = express.Router();
 const pedidoController = require('../controladores/pedidoController');

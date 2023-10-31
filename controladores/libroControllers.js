@@ -1,16 +1,16 @@
 const Book = require('../modelos_de_datos/libro');
 
-const libroController = {
-  getAllLibros: async (req, res) => {
-    try {
-      const libros = await libro.find();
-      res.json(libros);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  },
 
-  crearLibro: async (req, res) => {
+exports.getAllLibros = async (req, res) => {
+    try {
+        const libros = await libro.find();
+        res.json(libros);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+  exports.crearLibro = async (req, res) => {
     const { titulo, autor, precio } = req.body;
     const nuevoLibro = new libro({ titulo, autor, precio /* Otros campos del libro */ });
 
@@ -20,9 +20,9 @@ const libroController = {
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
-  },
+  };
 
-  updateLibro: async (req, res) => {
+  exports.updateLibro = async (req, res) => {
     const libroId = req.params.id;
     const { titulo, autor, precio /* Otros campos a actualizar */ } = req.body;
 
@@ -36,17 +36,15 @@ const libroController = {
     } catch (err) {
       res.status(400).json({ message: err.message });
     }
-  },
+  };
 
-  deleteLibro: async (req, res) => {
+exports.deleteLibro = async (req, res) => {
     const libroId = req.params.id;
     try {
-      const deletLibro = await libro.findByIdAndDelete(libroId);
-      res.json(deletLibro);
+        const deletLibro = await libro.findByIdAndDelete(libroId);
+        res.json(deletLibro);
     } catch (err) {
-      res.status(400).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
-  }
 };
 
-module.exports = libroController;
