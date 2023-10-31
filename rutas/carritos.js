@@ -4,8 +4,8 @@ const router = express.Router();
 const cartController = require('../controladores/carritoControllers');
 
 router.post('/add', cartController.addToCarrito);
-router.get('/view', cartController.getUserCart);
-router.delete('/remove/:id', cartController.borrardeCart);
+router.get('/view', cartController.getUserCarrito);
+router.delete('/remove/:id', cartController.borrardeCarrito);
 
 module.exports = router;
 

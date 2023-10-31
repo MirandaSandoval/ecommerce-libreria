@@ -4,8 +4,7 @@ const router = express.Router();
 const libroController = require('../controladores/libroControllers');
 const { route } = require('./libros');
 
-router.get('/', libroController.getAllBooks);
-router.get('/:id', libroController.getBookById);
+router.get('/', libroController.getAllLibros);
 router.delete('/remove/:id', libroController.deleteLibro);
 router.post('/add', libroController.crearLibro);
 

@@ -8,7 +8,7 @@ const carritoItemSchema = new mongoose.Schema({
 
 const carritoSchema = new mongoose.Schema({
   usuarioId: { type: mongoose.Schema.Types.ObjectId, ref: 'Usuario', required: true },
-  items: [cartItemSchema]
+  items: [carritoItemSchema]
 });
 
 const Carrito = mongoose.model('Carrito', carritoSchema);

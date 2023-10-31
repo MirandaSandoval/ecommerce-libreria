@@ -23,7 +23,6 @@ function calculateTotalAmount(cartItems) {
     // Puedes iterar por los elementos del carrito y sumar los precios de los libros multiplicados por la cantidad
     return totalAmount;
 };
-}
 function generateOrderNumber() {
     const fecha = new Date();
     const nro_Pedido = `ORD${fecha.getFullYear()}${fecha.getMonth() + 1}${fecha.getDate()}${fecha.getHours()}${fecha.getMinutes()}${fecha.getSeconds()}`;

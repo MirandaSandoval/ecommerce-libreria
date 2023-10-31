@@ -1,6 +1,6 @@
 const Cart = require('../modelos_de_datos/carrito');
 
-exports.getUserCart = async (req, res) => {
+exports.getUserCarrito = async (req, res) => {
     const usuarioId = req.params.usuarioId;
     try {
         const carrito = await carrito.findOne({ usuarioId });
