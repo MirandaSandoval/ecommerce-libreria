@@ -2,7 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const libroController = require('../controladores/libroControllers');
-const { route } = require('./libros');
 
 router.get('/', libroController.getAllLibros);
 router.delete('/remove/:id', libroController.deleteLibro);

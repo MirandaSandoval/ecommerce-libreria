@@ -8,7 +8,8 @@ const app = express();
 app.use(bodyParser.json());
 
 // Conexión a la base de datos MongoDB
-mongoose.connect('mongodb://localhost:27017/tienda-libros', {
+mongoose.connect('mongodb://127.0.0.1:27017/tienda-libros', {
+
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
